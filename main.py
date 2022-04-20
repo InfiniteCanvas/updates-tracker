@@ -3,16 +3,14 @@ import os
 import re
 import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from pathlib import Path
 from datetime import datetime, timedelta
-from time import sleep
+from pathlib import Path
 
 import pandas as pd
-import numpy as np
-from toolz import functoolz
 import requests_html
+from alive_progress import alive_it
 from bs4 import BeautifulSoup
-from alive_progress import alive_bar, alive_it
+from toolz import functoolz
 
 # Regex
 LAST_UPDATE = re.compile(r"([Tt]hread [Uu]pdated*:)\s*([0-9\-]+)")
@@ -95,7 +93,6 @@ def save_to_file(filepath: str, content: str, mode: str = "w+"):
         file.writelines(content)
 
 
-mapl = functoolz.compose_left(map, list)
 urlToDate = functoolz.compose_left(GetHtml, GetSoup, GetRawThreadUpdatedDate, GetThreadUpdated)
 
 
@@ -169,7 +166,8 @@ if __name__ == '__main__':
         print("\nThese need an update:")
         print(updated.head(len(updated)))
         # make thread urls links
-        updated["Url"] = updated["Url"].transform(lambda x: f'<a href="{x}" target="_blank" rel="noopener noreferrer">{x}</a>')
+        updated["Url"] = updated["Url"].transform(
+            lambda x: f'<a href="{x}" target="_blank" rel="noopener noreferrer">{x}</a>')
         save_to_file(OUTPUT, updated.to_html(index=False, escape=False), 'a+')
     else:
         print("Everything up to date!")
@@ -178,4 +176,3 @@ if __name__ == '__main__':
 
     # update tracked
     save_to_file(INPUT, df.drop(['Has Updated'], axis=1).to_csv(index=False))
-
