@@ -1,5 +1,9 @@
 ## Tracks updates on f95zone!
 
+Needs Python3. <br>
+Install the requirements with ``python -m pip install -r requirements.txt``<br>
+To add games for tracking, just put them in the CSV file (you can omit the updated date, it'll be filled).
+
 ```
 python.exe .\main.py -h
 usage: Simple Updates Tracker for f95zone [-h] [-i [INPUT]] [-o [OUTPUT]] [-c [COOKIES]] [-t [THREADS]] [--age [AGE]] [--retries [RETRIES]] [--delay [DELAY]]
