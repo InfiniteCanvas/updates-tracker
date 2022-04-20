@@ -24,7 +24,7 @@ DATE_FORMAT_THREAD = "%Y-%m-%d"
 DEFAULT_OUTPUT_FILENAME = "output.html"
 DEFAULT_INPUT_FILENAME = "tracked.csv"
 DEFAULT_COOKIES_FILENAME = "cookies"
-DEFAULT_THREADS = 10
+DEFAULT_THREADS = 5
 DEFAULT_AGE = 21
 DEFAULT_RETRIES = 5
 DEFAULT_DELAY = 5
@@ -115,7 +115,7 @@ def parse_arguments(raw_args) -> dict:
                         type=str,
                         help="Set the cookies file for the html session. Default is the 'cookies' in the script starting directory. If no file exists, no cookie is set.")
     parser.add_argument('-t', '--threads', nargs='?', type=int, default=DEFAULT_THREADS,
-                        help='Number of threads to use for fetching data')
+                        help='Number of threads to use for fetching data. Default is 5.')
     parser.add_argument('--age', nargs='?', type=int, default=DEFAULT_AGE,
                         help='Minimum age (in days) to qualify for a check. The default checks all entries older than 7 days.')
     parser.add_argument('--retries', nargs='?', type=int, default=DEFAULT_RETRIES,
